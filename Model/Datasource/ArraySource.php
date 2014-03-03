@@ -381,6 +381,9 @@ class ArraySource extends DataSource {
 			'recursive' => $recursive === 0 ? -1 : $recursive
 		);
 		foreach ($resultSet as &$record) {
+			if (!isset($record[$model->alias])) {
+				continue;
+			}
 			$data = array();
 			if ($type === 'belongsTo') {
 				if (isset($record[$model->alias][$assocData['foreignKey']])) {
